@@ -31,6 +31,26 @@ socket.on("color", ({ hex, op }) => {
   }
 });
 
+socket.on("alert", (data) => {
+  console.log(data);
+  device.morph("red", function () {
+    device.morph("orange", function () {
+      device.morph("yellow", function () {
+        device.morph("green", function () {
+          device.morph("blue", function () {
+            device.morph("purple", function () {
+              device.morph("#000000");
+            });
+          });
+        });
+      });
+    });
+  });
+  player.play("./media/youve-got-mail.mp3", (err) => {
+    if (err) console.log(`Could not play sound: ${err}`);
+  });
+});
+
 process.on("SIGINT", () => {
   device.turnOff();
   process.exit();
